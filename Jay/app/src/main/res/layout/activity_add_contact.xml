@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddContactActivity">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="avatar"
+            android:src="@drawable/image_contact" />
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/btn_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F" />
+
+            <RadioButton
+                android:id="@+id/btn_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Nom"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/txtSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Prenom"
+                android:inputType="textPersonName"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/dateBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                android:hint="Date de Naissance"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/numberTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Telephone"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/txtMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="Mail"
+                android:textSize="21sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtPostalC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Code Postal"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/txtCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Ville"
+                android:textSize="21sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#0B0A0A"
+            android:text="Valider"
+            android:layout_gravity="center_horizontal"
+            app:backgroundTint="#000000" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

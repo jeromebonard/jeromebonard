@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="welcome">Welcome</string>
+    <string name="title_activity_add_contact" translatable="false">AddContactActivity</string>
+
+
+
+</resources>
