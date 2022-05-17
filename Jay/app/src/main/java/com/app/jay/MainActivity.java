@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            String result = data.getStringExtra("AddToMain");
-            Log.d("ActA", result);
+            Contact contact = (Contact) data.getSerializableExtra("contact");
+            Log.d("ActA", contact.getSurname() + contact.getGender() + contact.getTxtName());
         }
     }
 

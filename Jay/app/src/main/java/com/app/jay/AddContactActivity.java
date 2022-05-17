@@ -18,12 +18,14 @@ public class AddContactActivity extends AppCompatActivity {
     EditText txtName,txtSurname,dateBirth,numberTel,txtMail;
     EditText txtPostalC,txtCity;
     RadioGroup rgGender;
+    String rgGenderChoice;
     Contact contact;
 
     @Override
     public void onBackPressed() {
+
         Intent intentB = new Intent();
-        intentB.putExtra("AddToMain", contact.toString());
+        intentB.putExtra("contact", contact);
         setResult(RESULT_OK, intentB);
         super.onBackPressed();
     }
@@ -45,10 +47,6 @@ public class AddContactActivity extends AppCompatActivity {
 
         btnValidate.setOnClickListener(view -> {
         verifycontent();
-
-        this.contact = new Contact(txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
-
-
         });
     }
 
@@ -59,21 +57,28 @@ public class AddContactActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Champ requis non renseigné",Toast.LENGTH_LONG);
                 toast.show();
             }
-            else showContent();
+            else {
+                showContent();
+            }
         }
         public void showContent(){
-            String rgGenderChoice = "";
+
             if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(0).getId()){
-                rgGenderChoice = "Female";
+                this.rgGenderChoice = "Female";
             }else if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(1).getId()){
-                rgGenderChoice = "Male";
+                this.rgGenderChoice = "Male";
             }
+            /*
             String saisie = rgGenderChoice + "\n"
             + txtName.getText().toString() +" " + txtSurname.getText().toString() + "\n"
             + dateBirth.getText().toString() + "\n"
             + numberTel.getText().toString() +"\n"
             + txtMail.getText().toString() + "\n"
             + txtPostalC.getText().toString() + " " + txtCity.getText().toString();
+            */
+
+            contact = new Contact(rgGenderChoice, txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
+            String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
             builder.setMessage(saisie).setTitle("Informations saisies");
