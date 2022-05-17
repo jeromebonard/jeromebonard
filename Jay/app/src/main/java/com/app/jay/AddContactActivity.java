@@ -54,7 +54,7 @@ public class AddContactActivity extends AppCompatActivity {
             if(txtName.getText().toString().equals("") ||
                     (txtSurname.getText().toString().equals("")) ||
                     (numberTel.getText().toString().equals(""))){
-                Toast toast = Toast.makeText(getApplicationContext(), "Champ requis non renseigné",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), "Champ(s) requis non renseigné(s)",Toast.LENGTH_LONG);
                 toast.show();
             }
             else {
@@ -81,7 +81,7 @@ public class AddContactActivity extends AppCompatActivity {
             String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
-            builder.setMessage(saisie).setTitle("Informations saisies");
+            builder.setMessage(contact.toString()).setTitle("Informations saisies");
             AlertDialog dialog = builder.create();
             dialog.show();
         }

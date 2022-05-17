@@ -36,7 +36,8 @@ public class Contact implements Serializable {
 
     @Override
     public String toString(){
-        return this.name + this.surname;
+        return this.name +"\n"+ this.surname
+                +"\n"+ this.gender +"\n"+ this.telephone;
     }
 
 

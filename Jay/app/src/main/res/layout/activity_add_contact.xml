@@ -60,7 +60,7 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="Nom"
+                android:hint="Nom*"
                 android:textSize="21sp" />
 
             <EditText
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Prenom"
+                android:hint="Prenom*"
                 android:inputType="textPersonName"
                 android:textSize="21sp" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:hint="Telephone"
+                android:hint="Telephone*"
                 android:textSize="21sp" />
 
             <EditText
