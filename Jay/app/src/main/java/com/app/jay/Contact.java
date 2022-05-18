@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class Contact implements Serializable {
 
-    private String gender, name, surname, dOBirth, telephone , mail, postalC, city;
+    private String gender, name, surname, dOBirth, telephone ,
+            mail, postalC, city;
+    private int imageId;
 
     public Contact(){
     }
@@ -34,11 +36,15 @@ public class Contact implements Serializable {
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
 
+    public int getImageId() { return imageId; }
+    public void setImageId(String ImageId){ this.imageId = imageId; }
+
     @Override
     public String toString(){
         return this.name +"\n"+ this.surname
                 +"\n"+ this.gender +"\n"+ this.telephone;
     }
+
 
 
 }

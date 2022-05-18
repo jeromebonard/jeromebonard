@@ -7,12 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<Contact> contactList = new ArrayList<>();
+    private ContactAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(myIntent, 1);
             }
         });
+        adapter = new ContactAdapter(getApplicationContext(), R.layout.list_item, contactList);
+        ListView listView = findViewById(R.id.contact_list);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -36,9 +44,14 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Contact contact = (Contact) data.getSerializableExtra("contact");
-            Log.d("ActA", contact.toString());
+            contactList.add(contact);
+            adapter.notifyDataSetChanged();
+            Log.d("ActA", contactList.get(0).toString());
         }
+
     }
+
+
 
     @Override
     protected void onStart() {
