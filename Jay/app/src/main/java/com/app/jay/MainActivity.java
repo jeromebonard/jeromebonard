@@ -45,11 +45,19 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShowDetailContact.class);
                 intent.putExtra("Test", listView.getItemAtPosition(i).toString());
                 startActivity(intent);
             }
+        });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
+                contactList.remove(i);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
         });
 
     }
