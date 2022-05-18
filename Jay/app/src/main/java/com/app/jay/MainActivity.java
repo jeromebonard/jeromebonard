@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -17,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("MainActivity", "Bonjour");
-        Button button = findViewById(R.id.button);
-        TextView text = findViewById(R.id.text);
+        FloatingActionButton button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            String result = data.getStringExtra("AddToMain");
-            Log.d("ActA", result);
+            Contact contact = (Contact) data.getSerializableExtra("contact");
+            Log.d("ActA", contact.toString());
         }
     }
 
