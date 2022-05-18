@@ -6,7 +6,7 @@ public class Contact implements Serializable {
 
     private String gender, name, surname, dOBirth, telephone ,
             mail, postalC, city;
-    private int imageId;
+    private int imageId = R.drawable.image_contact;
 
     public Contact(){
     }

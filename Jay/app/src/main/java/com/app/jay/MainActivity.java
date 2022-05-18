@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterViewAnimator;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Contact> contactList = new ArrayList<>();
     private ContactAdapter adapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         adapter = new ContactAdapter(getApplicationContext(), R.layout.list_item, contactList);
-        ListView listView = findViewById(R.id.contact_list);
+        listView = findViewById(R.id.contact_list);
         listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+                intent.putExtra("Test", listView.getItemAtPosition(i).toString());
+                startActivity(intent);
+            }
+
+        });
+
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -82,4 +98,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i("MainActivity", "onDestroy");
     }
+
 }
