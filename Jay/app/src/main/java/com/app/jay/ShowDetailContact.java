@@ -33,7 +33,7 @@ public class ShowDetailContact extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_add_contact);
+            setContentView(R.layout.show_detail_contact);
             btnValidate = findViewById(R.id.btnValidate);
             txtName = findViewById(R.id.txtName);
             txtSurname = findViewById(R.id.txtSurname);
@@ -68,9 +68,9 @@ public class ShowDetailContact extends AppCompatActivity {
         public void showContent(){
 
             if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(0).getId()){
-                this.rgGenderChoice = "Female";
+                this.rgGenderChoice = "Femme";
             }else if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(1).getId()){
-                this.rgGenderChoice = "Male";
+                this.rgGenderChoice = "Homme";
             }
             /*
             String saisie = rgGenderChoice + "\n"
@@ -84,6 +84,11 @@ public class ShowDetailContact extends AppCompatActivity {
             contact.setTxtName(txtName.getText().toString());
             contact.setSurname(txtSurname.getText().toString());
             contact.setGender(rgGenderChoice);
+            contact.setDOBirth(dateBirth.getText().toString());
+            contact.setTelephone(numberTel.getText().toString());
+            contact.setMail(txtMail.getText().toString());
+            contact.setPostalC(txtPostalC.getText().toString());
+            contact.setCity(txtCity.getText().toString());
 
             AlertDialog.Builder alert = new AlertDialog.Builder(ShowDetailContact.this);
             alert.setTitle("Informations saisies");;
@@ -101,5 +106,17 @@ public class ShowDetailContact extends AppCompatActivity {
         }
         public void setInfosContact(){
             this.txtName.setText(this.contact.getTxtName());
+            this.txtSurname.setText(this.contact.getSurname());
+            if (contact.getGender()=="Female") { //cocher le bouton radio correspondant au genre
+                this.rgGender.check(rgGender.getChildAt(0).getId());
+            }else{
+                this.rgGender.check(rgGender.getChildAt(1).getId());
+            }
+            this.dateBirth.setText(this.contact.getDOBirth());
+            this.numberTel.setText(this.contact.getTelephone());
+            this.txtMail.setText(this.contact.getMail());
+            this.txtPostalC.setText(this.contact.getPostalC());
+            this.txtCity.setText(this.contact.getCity());
+            contact.setCity(txtCity.getText().toString());
         }
 }

@@ -78,7 +78,11 @@ public class AddContactActivity extends AppCompatActivity {
             + txtPostalC.getText().toString() + " " + txtCity.getText().toString();
             */
 
-            contact = new Contact(rgGenderChoice, txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
+            contact = new Contact(rgGenderChoice, txtName.getText().toString(),
+                    txtSurname.getText().toString(), numberTel.getText().toString(),
+                    dateBirth.getText().toString(), txtMail.getText().toString(),
+                    txtPostalC.getText().toString(), txtCity.getText().toString());
+
             //String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
 
             AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.this);

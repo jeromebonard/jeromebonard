@@ -19,6 +19,15 @@ public class Contact implements Serializable {
         this.telephone = telephone;
     }
 
+    public Contact(String gender, String name, String surname, String telephone, String dOBirth,
+                   String mail, String postalC, String city){
+        this(gender, name, surname, telephone);
+        this.dOBirth = dOBirth;
+        this.mail = mail;
+        this.postalC = postalC;
+        this.city = city;
+    }
+
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
     public String getTxtName() { return name; }
@@ -41,10 +50,13 @@ public class Contact implements Serializable {
 
     @Override
     public String toString(){
-        return this.name +"\n"+ this.surname
-                +"\n"+ this.gender +"\n"+ this.telephone;
+        return ignoreNull(this.surname)+ ignoreNull(this.name)+
+                ignoreNull(this.gender)+ ignoreNull(this.telephone)+
+                        ignoreNull(this.dOBirth)+  ignoreNull(this.mail)+
+                                ignoreNull(this.postalC)+ ignoreNull(this.city.toString());
     }
 
-
-
+    private String ignoreNull(String str){
+        return (str ==null | str.equals("") | str.isEmpty()) ? "" : (str+"\n");
+    }
 }
