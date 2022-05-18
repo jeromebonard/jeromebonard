@@ -2,6 +2,8 @@ package com.app.jay;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Contact> contactList = new ArrayList<>();
     private ContactAdapter adapter;
     private ListView listView;
+    private Contact selectedContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +48,44 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedContact = (Contact) listView.getItemAtPosition(i);
                 Intent intent = new Intent(MainActivity.this, ShowDetailContact.class);
-                intent.putExtra("Test", listView.getItemAtPosition(i).toString());
-                startActivity(intent);
+                intent.putExtra("contact", selectedContact);
+                        //"contact", contactList.get(i));
+                startActivityForResult(intent, 2);
             }
         });
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
-                contactList.remove(i);
-                adapter.notifyDataSetChanged();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Que faire de "+contactList.get(i).getSurname()+" "
+                        +contactList.get(i).getTxtName()+" ?");
+
+                builder.setPositiveButton("SUPPRIMER", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        contactList.remove(i);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+                builder.setNegativeButton("MODIFIER", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+
+                builder.setNeutralButton("RIEN", new DialogInterface.OnClickListener()     {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
                 return true;
             }
         });
@@ -69,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Contact contact = (Contact) data.getSerializableExtra("contact");
             contactList.add(contact);
+            adapter.notifyDataSetChanged();
+            Log.d("ActA", contactList.get(0).toString());
+        }
+        else if(requestCode == 2 && resultCode == RESULT_OK) {
+            contactList.remove(selectedContact);
+            selectedContact = (Contact) data.getSerializableExtra("contact");
+            contactList.add(selectedContact);
             adapter.notifyDataSetChanged();
             Log.d("ActA", contactList.get(0).toString());
         }

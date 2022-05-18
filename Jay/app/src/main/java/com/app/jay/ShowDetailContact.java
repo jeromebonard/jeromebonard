@@ -1,7 +1,9 @@
 package com.app.jay;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -46,6 +48,10 @@ public class ShowDetailContact extends AppCompatActivity {
             btnValidate.setOnClickListener(view -> {
                 verifycontent();
             });
+
+            contact = (Contact) getIntent().getSerializableExtra("contact");
+            setInfosContact();
+
         }
 
         public void verifycontent(){
@@ -75,12 +81,25 @@ public class ShowDetailContact extends AppCompatActivity {
             + txtPostalC.getText().toString() + " " + txtCity.getText().toString();
             */
 
-            contact = new Contact(rgGenderChoice, txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
-            String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
+            contact.setTxtName(txtName.getText().toString());
+            contact.setSurname(txtSurname.getText().toString());
+            contact.setGender(rgGenderChoice);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(com.app.jay.ShowDetailContact.this);
-            builder.setMessage(contact.toString()).setTitle("Informations saisies");
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(ShowDetailContact.this);
+            alert.setTitle("Informations saisies");;
+            alert.setMessage(contact.toString());
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intentB = new Intent();
+                    intentB.putExtra("contact", contact);
+                    setResult(RESULT_OK, intentB);
+                    onBackPressed();
+                }
+            });
+            alert.show();
+        }
+        public void setInfosContact(){
+            this.txtName.setText(this.contact.getTxtName());
         }
 }

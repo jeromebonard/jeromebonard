@@ -3,6 +3,7 @@ package com.app.jay;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +25,9 @@ public class AddContactActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intentB = new Intent();
-        intentB.putExtra("contact", contact);
-        setResult(RESULT_OK, intentB);
+        //Intent intentB = new Intent();
+        //intentB.putExtra("contact", contact);
+        //setResult(RESULT_OK, intentB);
         super.onBackPressed();
     }
 
@@ -64,9 +65,9 @@ public class AddContactActivity extends AppCompatActivity {
         public void showContent(){
 
             if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(0).getId()){
-                this.rgGenderChoice = "Female";
+                this.rgGenderChoice = "Femme";
             }else if(rgGender.getCheckedRadioButtonId() == rgGender.getChildAt(1).getId()){
-                this.rgGenderChoice = "Male";
+                this.rgGenderChoice = "Homme";
             }
             /*
             String saisie = rgGenderChoice + "\n"
@@ -78,11 +79,20 @@ public class AddContactActivity extends AppCompatActivity {
             */
 
             contact = new Contact(rgGenderChoice, txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
-            String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
+            //String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
-            builder.setMessage(contact.toString()).setTitle("Informations saisies");
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(AddContactActivity.this);
+            alert.setTitle("Informations saisies");;
+            alert.setMessage(contact.toString());
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intentB = new Intent();
+                    intentB.putExtra("contact", contact);
+                    setResult(RESULT_OK, intentB);
+                    onBackPressed();
+                }
+            });
+            alert.show();
         }
 }

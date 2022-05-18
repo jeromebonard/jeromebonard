@@ -11,9 +11,10 @@
         android:theme="@style/Theme.Jay" >
         <activity
             android:name=".AddContactActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"/>
+        <activity
+            android:name=".ShowDetailContact"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true" >
