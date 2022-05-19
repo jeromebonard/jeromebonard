@@ -1,2 +1,12 @@
-package com.app.appcontacts;public class App {
+package com.app.appcontacts;
+
+import android.app.Application;
+
+
+public class App extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
 }
