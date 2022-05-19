@@ -1,11 +1,15 @@
 package com.app.jay;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.gson.*;
 
 import android.app.AlertDialog;
+import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,17 +20,31 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Contact> contactList = new ArrayList<>();
+    private ArrayList<Contact> contactList;
     private ContactAdapter adapter;
     private ListView listView;
     private Contact selectedContact;
+    private String fileName = "Contacts";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        contactList = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("MainActivity", "Bonjour");
@@ -71,13 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.setNegativeButton("MODIFIER", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                    }
-                });
-
-                builder.setNeutralButton("RIEN", new DialogInterface.OnClickListener()     {
+                builder.setNeutralButton("RIEN", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //do things
                     }
@@ -89,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        /*try {             //ne fonctionne pas
+            contactList = loadContacts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
     }
 
@@ -142,6 +159,57 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i("MainActivity", "onDestroy");
+        try {
+            saveContacts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    private void saveContacts() throws IOException{
+        //File test = new File(Environment.getDataDirectory());
+        /*for (Contact c: contactList
+             ) {
+            Gson json = new Gson();
+            try {
+                json.toJson(c, new FileWriter("C:\\Users\\antho\\Documents\\GitHub\\jeromebonard\\Jay\\app\\src\\main\\res\\raw\\contacts.json"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+        Context context = getApplicationContext();
+        File file = new File(fileName);
+        file.delete();
+        new File(context.getFilesDir(), fileName);
+        FileOutputStream outputStream = context.openFileOutput(fileName, MODE_PRIVATE);
+
+        for(Contact contact : contactList) {
+            outputStream.write(contact.toString().getBytes());
+        }
+        outputStream.close();
+    }
+
+    private ArrayList<Contact> loadContacts() throws IOException {
+            String row;
+            String[] param;
+            ArrayList<Contact> test = new ArrayList<>();
+
+            Context context = getApplicationContext();
+            FileInputStream inputStream = context.openFileInput(fileName);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            while((row = bufferedReader.readLine()) != null) {
+                param = row.split(";");
+                test.add(new Contact(param[0], param[1], param[2], param[3],
+                        param[4], param[5], param[6], param[7]));
+            }
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+
+            return test;
+
+        }
 }
