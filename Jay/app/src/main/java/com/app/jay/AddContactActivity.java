@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -78,7 +76,7 @@ public class AddContactActivity extends AppCompatActivity {
             */
 
             contact = new Contact(rgGenderChoice, txtName.getText().toString(), txtSurname.getText().toString(), numberTel.getText().toString());
-            String saisie = this.contact.getTxtName()+this.contact.getSurname()+this.contact.getGender();
+            String saisie = this.contact.getName()+this.contact.getSurname()+this.contact.getGender();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
             builder.setMessage(contact.toString()).setTitle("Informations saisies");

@@ -1,22 +1,11 @@
-package com.app.jay;
+package com.app.appcontacts;
 
-import java.io.Serializable;
+public class ContactsModal {
 
-public class Contact implements Serializable {
-
+    // variables
     private String gender, name, surname, dOBirth, telephone , mail, postalC, city;
 
-    public Contact(){
-    }
-
-    public Contact(String gender, String name, String surname, String telephone) {
-        this();
-        this.gender = gender;
-        this.name = name;
-        this.surname = surname;
-        this.telephone = telephone;
-    }
-
+    // getters and setters
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
     public String getName() { return name; }
@@ -34,6 +23,19 @@ public class Contact implements Serializable {
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
 
+    // constructors
+    public ContactsModal(){
+    }
+
+    public ContactsModal(String gender, String name, String surname, String telephone) {
+        this();
+        this.gender = gender;
+        this.name = name;
+        this.surname = surname;
+        this.telephone = telephone;
+    }
+
+    // methode toString override
     @Override
     public String toString(){
         return this.name +"\n"+ this.surname

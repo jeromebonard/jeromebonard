@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppContacts</string>
+
+    <string name="AppContacts_server">https://localhost:3306appcontacts"</string>
+
+    <!-- Change the following strings as required -->
+    <string name="AppContacts_id">root</string>
+    <string name="AppContacts_key"></string>
+
+</resources>

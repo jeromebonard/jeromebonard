@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.jay" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--permissions to read contacts-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--permissions to write contacts-->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -9,11 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jay" >
-        <activity
-            android:name=".AddContactActivity"
-            android:exported="false">
+        <activity android:name=".AddContactActivity" android:exported="false"></activity>
 
-        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" >
