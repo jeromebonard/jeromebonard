@@ -18,7 +18,7 @@ import java.util.List;
 
 public class WeatherDataService {
 
-    public static final String QUERY_FOR_CITY_ID = "https://www.metaweather.com/api/location/search/?query=";
+    public static final String QUERY_FOR_CITY_ID = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=4916dd395b6f4c75a4c64831220906&q=";
     public static final String QUERY_FOR_CITY_WEATHER_BY_ID = "https://www.metaweather.com/api/location/";
 
     Context context;
